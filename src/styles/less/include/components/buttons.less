@@ -1,3 +1,16 @@
 .action-remove {
-	
+	@size: 34px;
+
+	width: @size;
+	height: @size;
+	background: @WARNING;
+	border: none;
+	border-radius: 50%;
+	color: white;
+
+    &::before {
+    	content: "X"; // ideally we'd go with a custom font and replace X with an icon character
+		font-size: 21px;
+	    font-family: cursive; 
+	}
 }

@@ -15,53 +15,59 @@
 
 	</head>
 	<body ng-app="SampleApp" ng-controller="SampleAppController" ng-init="init();">
-		<header>
-			<span>Windows generator</span>
-			<fieldset>
-				<button class="btn btn-primary" ng-click="addDataset();">Add window</button>
-				<button class="btn btn-default" ng-click="outputDatasets();">Get data</button>
-			</fieldset>
-		</header>
-		<main>
-			<section>
-				<fieldset class="row" ng-repeat="dataset in model.datasets">
-					<div class="col-xs-3">
-						<!-- depending on the expected flexibility for the final solution we could move field names, amounts and types to a JSON config and build the form based on it -->
-						<label for="window-name-{{$index}}">Window name</label>
-						<input id="window-name-{{$index}}" type="text" class="form-control" ng-model="dataset.name" />
-					</div>
-					<div class="col-xs-3" ng-class="{'has-error': !checkValidDateFormat(dataset.startDate)}"> <!-- for larger apps working with has-error directly is really inefficient, and it's better to build a component that cover the most frequent uses of error display -->
-						<label for="start-date-{{$index}}">Start date</label>
-						<input id="start-date-{{$index}}" type="text" class="form-control" ng-model="dataset.startDate" ng-change="calculateMax();" />
-						<div class="help-block error">
-							Invalid date format
-						</div>
-					</div>
-					<div class="col-xs-3" ng-class="{'has-error': !checkValidDateFormat(dataset.endDate)}">
-						<label for="end-date-{{$index}}">End date</label>
-						<input id="end-date-{{$index}}" type="text" class="form-control" ng-model="dataset.endDate" ng-change="calculateMax();" />
-						<div class="help-block error"><!-- TODO: need to reduce the impact show/hide has on layout, causing elements to "jump" -->
-							Invalid date format
-						</div>
-					</div>
-					<div class="col-xs-3">
-						<label for="remove-{{$index}}">&nbsp;</label>
-						<div>
-							<button ng-click="removeDataset($index);calculateMax();" class="action-remove"><span class="screen-reader-helper">Remove window</span>X</button>
-						</div>
-					</div>
+		<div class="page-container">
+			<header>
+				<h1>Windows generator</h1>
+				<h2 class="screen-reader-helper">Main controls</h2>
+				<fieldset class="actions">
+					<button class="btn btn-primary" ng-click="addDataset();">Add window</button>
+					<button class="btn btn-default" ng-click="outputDatasets();">Get data</button>
 				</fieldset>
-			</section>
-			<section>
-				<div ng-repeat="dataset in model.datasets">
-					<span>{{dataset.name || 'Unnamed'}}</span>
-					<div class="bar-container">
-						<div class="bar-value" ng-class="'bar-color-' + ($index % 8)" ng-style="{width: (100 * calculateValue(dataset) / model.max) + '%'}">
+			</header>
+			<main>
+				<section>
+					<h2 class="screen-reader-helper">Data manager</h2>
+					<fieldset class="row" ng-repeat="dataset in model.datasets">
+						<div class="col-sm-3">
+							<!-- depending on the expected flexibility for the final solution we could move field names, amounts and types to a JSON config and build the form based on it -->
+							<label for="window-name-{{$index}}">Window name</label>
+							<input id="window-name-{{$index}}" type="text" class="form-control" ng-model="dataset.name" />
+						</div>
+						<div class="col-sm-3" ng-class="{'has-error': !checkValidDateFormat(dataset.startDate)}"> <!-- for larger apps working with has-error directly is really inefficient, and it's better to build a component that cover the most frequent uses of error display -->
+							<label for="start-date-{{$index}}">Start date</label>
+							<input id="start-date-{{$index}}" type="text" class="form-control" ng-model="dataset.startDate" ng-change="calculateMax();" />
+							<div class="help-block error">
+								Invalid date format
+							</div>
+						</div>
+						<div class="col-sm-3" ng-class="{'has-error': !checkValidDateFormat(dataset.endDate)}">
+							<label for="end-date-{{$index}}">End date</label>
+							<input id="end-date-{{$index}}" type="text" class="form-control" ng-model="dataset.endDate" ng-change="calculateMax();" />
+							<div class="help-block error"><!-- TODO: need to reduce the impact show/hide has on layout, causing elements to "jump" -->
+								Invalid date format
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<label for="remove-{{$index}}">&nbsp;</label>
+							<div>
+								<button ng-click="removeDataset($index);calculateMax();" class="action-remove"><span class="screen-reader-helper">Remove window</span></button>
+							</div>
+						</div>
+					</fieldset>
+				</section>
+				<section>
+					<div ng-repeat="dataset in model.datasets">
+						<h2 class="screen-reader-helper">Results</h2>
+						<span>{{dataset.name || 'Unnamed'}}</span>
+						<div class="bar-container">
+							<div class="bar-value" ng-class="'bar-color-' + ($index % 8)" ng-style="{width: calculatePercent(dataset)}">
+								<span class="screen-reader-helper">{{calculatePercent(dataset)}}</span>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-		</main>
-		<footer>Made by Arek Bisaga</footer>
+				</section>
+			</main>
+			<footer>Made by Arek Bisaga</footer>
+		</div>
 	</body>
 </html>
