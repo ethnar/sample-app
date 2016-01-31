@@ -15,28 +15,33 @@
 	}
 }
 
-.btn-primary {
-	background: @ACTION_PRIMARY; // to overwrite everything, including background-image
+.button(@bg-color, @font-color) {
+	background: @bg-color; // to overwrite everything, including background-image
+	color: @font-color;
+	text-shadow: none;
 	border: none;
+
+	&:focus, &:hover {
+		background: lighten(@bg-color, 10%);
+		color: @font-color;
+	}
+	&:active, &:active:focus {
+		background: darken(@bg-color, 10%);
+		color: @font-color;
+	}
+	fieldset[disabled] & {
+ 		// for a full-fledged app we'd also add respective rules for button itself being disabled
+		&, &:hover, &:active {
+			background: desaturate(@bg-color, 30%);
+			color: @font-color;
+		}
+	}
 }
-.btn-primary:focus, .btn-primary:hover {
-	background: lighten(@ACTION_PRIMARY, 10%);
-}
-.btn-primary:active, .btn-primary:active:focus {
-	background: darken(@ACTION_PRIMARY, 10%);
+
+.btn-primary {
+	.button(@ACTION_PRIMARY, @LIGHT);
 }
 
 .btn-default {
-	background: @ACTION_DEFAULT;
-	color: @LIGHT;
-	text-shadow: none;
-	border: none;
-}
-.btn-default:focus, .btn-default:hover {
-	background: lighten(@ACTION_DEFAULT, 10%);
-	color: @LIGHT;
-}
-.btn-default:active, .btn-default:active:focus {
-	background: darken(@ACTION_DEFAULT, 10%);
-	color: @LIGHT;
+	.button(@ACTION_DEFAULT, @LIGHT);
 }

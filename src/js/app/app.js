@@ -54,9 +54,12 @@ angular.module('SampleApp', [])
 	};
 
 	controller.loadDatasets = function () {
+		$scope.model.dataLoading = true;
+		$scope.model.datasets = [];
 		sampleAppDataService.promiseData().then(function (response) {
 			$scope.model.datasets = response.data;
 			$scope.calculateMax();
+			$scope.model.dataLoading = false;
 		});
 	};
 });

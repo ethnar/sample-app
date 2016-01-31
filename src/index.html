@@ -19,7 +19,7 @@
 			<header>
 				<h1>Windows generator</h1>
 				<h2 class="screen-reader-helper">Main controls</h2>
-				<fieldset class="actions">
+				<fieldset class="actions" ng-disabled="model.dataLoading">
 					<button class="btn btn-primary" ng-click="addDataset();">Add window</button>
 					<button class="btn btn-default" ng-click="outputDatasets();">Get data</button>
 				</fieldset>
@@ -27,6 +27,7 @@
 			<main>
 				<section class="data-manager">
 					<h2 class="screen-reader-helper">Data manager</h2>
+					<div class="loading-indicator" ng-if="model.dataLoading">Loading</div>
 					<fieldset class="row" ng-repeat="dataset in model.datasets">
 						<div class="col-sm-3">
 							<!-- depending on the expected flexibility for the final solution we could move field names, amounts and types to a JSON config and build the form based on it -->
