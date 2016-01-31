@@ -43,7 +43,7 @@
 						<div class="col-sm-3" ng-class="{'has-error': !checkValidDateFormat(dataset.endDate)}">
 							<label for="end-date-{{$index}}">End date</label>
 							<input id="end-date-{{$index}}" type="text" class="form-control" ng-model="dataset.endDate" ng-change="calculateMax();" />
-							<div class="help-block error"><!-- TODO: need to reduce the impact show/hide has on layout, causing elements to "jump" -->
+							<div class="help-block error">
 								Invalid date format
 							</div>
 						</div>

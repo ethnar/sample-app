@@ -58,6 +58,5 @@ angular.module('SampleApp', [])
 			$scope.model.datasets = response.data;
 			$scope.calculateMax();
 		});
-		// TODO
 	};
 });
