@@ -6,7 +6,7 @@ angular.module('SampleApp', [])
 	var controller = this;
 
 	$scope.model = {
-		max: 0,
+		max: 1,
 		datasets: []
 	};
 
@@ -26,9 +26,9 @@ angular.module('SampleApp', [])
 	};
 
 	$scope.calculateMax = function () {
-		$scope.model.max = 0;
+		$scope.model.max = 1;
 		_.each($scope.model.datasets, function (dataset) {
-			$scope.model.max = Math.max($scope.model.max, $scope.calculateValue(dataset));
+			$scope.model.max = Math.max($scope.model.max, $scope.calculateValue(dataset) || 0);
 		});
 	};
 
@@ -40,7 +40,11 @@ angular.module('SampleApp', [])
 		// this can turn into a performance bottleneck rather quickly due to date parse, so depending on the amount of data we could be better off changing the data storage to hold start date and amount of days instead of start and end dates
 		var startTime = new Date(dataset.endDate).getTime();
 		var endTime = new Date(dataset.startDate).getTime();
-		return (startTime - endTime) / (24 * 60 * 60 * 1000) + 1; // inclusive
+		return (startTime - endTime) / (24 * 60 * 60 * 1000) + 1 /* inclusive */ || 0;
+	};
+
+	$scope.checkValidDateFormat = function (dateString) {
+		return !isNaN(new Date(dateString).getTime());
 	};
 
 	controller.loadDatasets = function () {
