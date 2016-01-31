@@ -43,7 +43,7 @@ angular.module('SampleApp', [])
 	};
 
 	$scope.checkValidDateFormat = function (dateString) {
-		return !isNaN(new Date(dateString).getTime());
+		return !dateString || !isNaN(new Date(dateString).getTime());
 	};
 
 	controller.calculateValue = function (dataset) {
