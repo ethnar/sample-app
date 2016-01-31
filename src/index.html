@@ -25,7 +25,7 @@
 				</fieldset>
 			</header>
 			<main>
-				<section>
+				<section class="data-manager">
 					<h2 class="screen-reader-helper">Data manager</h2>
 					<fieldset class="row" ng-repeat="dataset in model.datasets">
 						<div class="col-sm-3">
@@ -50,17 +50,17 @@
 						<div class="col-sm-3">
 							<label for="remove-{{$index}}">&nbsp;</label>
 							<div>
-								<button ng-click="removeDataset($index);calculateMax();" class="action-remove"><span class="screen-reader-helper">Remove window</span></button>
+								<button ng-click="removeDataset($index);calculateMax();" class="action-remove"><span class="screen-reader-helper">Remove window</span></button><!-- depending on the prupose of the app, very often a confirmation dialog would be used before actually deleting a row -->
 							</div>
 						</div>
 					</fieldset>
 				</section>
-				<section>
+				<section class="bars">
 					<div ng-repeat="dataset in model.datasets">
 						<h2 class="screen-reader-helper">Results</h2>
-						<span>{{dataset.name || 'Unnamed'}}</span>
+						<span class="bar-label">{{dataset.name || 'Unnamed'}}</span>
 						<div class="bar-container">
-							<div class="bar-value" ng-class="'bar-color-' + ($index % 8)" ng-style="{width: calculatePercent(dataset)}">
+							<div class="bar-value" ng-class="'bar-color-' + ($index % 8 + 1)" ng-style="{width: calculatePercent(dataset)}">
 								<span class="screen-reader-helper">{{calculatePercent(dataset)}}</span>
 							</div>
 						</div>

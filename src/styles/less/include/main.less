@@ -4,28 +4,79 @@ html, body {
 }
 
 .page-container {
-    padding: 20px;
+    padding: 20px 20px 0;
     min-height: 100%;
 	width: 90%;
 	margin: auto;
 	background-color: @BACKGROUND;
 }
 
-.bar-value {
-	height: 20px;
-}
+header {
+	.actions {
+		display: inline-block;
+	    vertical-align: bottom;
 
-.error {
-	display: none;
-}
-
-.has-error {
-	.error {
-		display: block;
+	    button {
+    	    float: left;
+    	    margin-left: 15px;
+	        min-width: 115px;
+	   	}
 	}
 }
 
-.actions {
-	display: inline-block;
-    vertical-align: bottom;
+section {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid @SEPARATOR;
+}
+
+section.data-manager {
+	fieldset {
+		padding-bottom: 10px;
+
+		label {
+			font-weight: normal;
+			color: @DEEMPHASIZED;
+			padding: 3px 5px 0;
+		}
+	}
+
+	.error {
+		display: none;
+	}
+
+	.has-error {
+		.error {
+			display: block;
+		}
+	}
+}
+
+section.bars {
+	padding-top: 52px;
+
+	.bar-label {
+		font-weight: bold;
+		padding: 3px 0 0;
+	}
+
+	.bar-value {
+		height: 20px;
+	}
+
+	.generate-bar-colors(8);
+
+	.generate-bar-colors(@n, @i: 1) when (@i =< @n) {
+	  .bar-color-@{i} {
+	    background-color: extract(@BAR_COLORS, @i);
+	    border-bottom: 1px solid darken(extract(@BAR_COLORS, @i), 10%);
+	  }
+	  .generate-bar-colors(@n, (@i + 1));
+	}
+}
+
+footer {
+	text-align: right;
+	padding: 15px 0 0;
+	color: @DEEMPHASIZED;
 }

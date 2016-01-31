@@ -1,42 +1,16 @@
 // color definitions
 
+// we could consider adding prefixes to colors, but in this projects other variables will be either local or named very explicitly
+
 @BACKDROP: #E6E6E6;
 @BACKGROUND: #FFFFFF;
+@SEPARATOR: #E7E7E7;
 
-@BAR_COLOR_0: #5AB858;
-@BAR_COLOR_1: #54C1E1;
-@BAR_COLOR_2: #F2AE43;
-@BAR_COLOR_3: #AE43F2;
-@BAR_COLOR_4: #AEF243;
-@BAR_COLOR_5: #B85A58;
-@BAR_COLOR_6: #585AB8;
-@BAR_COLOR_7: #E13441;
+@BAR_COLORS: #5AB858, #54C1E1, #F2AE43, #AE43F2, #AEF243, #B85A58, #585AB8, #E13441;
+
+@ACTION_PRIMARY: #58B857;
+@ACTION_DEFAULT: #3FA9F5;
 
 @WARNING: #DB524C;
 
-// classes
-
-.bar-color-0 {
-	background-color: @BAR_COLOR_0;
-}
-.bar-color-1 {
-	background-color: @BAR_COLOR_1;
-}
-.bar-color-2 {
-	background-color: @BAR_COLOR_2;
-}
-.bar-color-3 {
-	background-color: @BAR_COLOR_3;
-}
-.bar-color-4 {
-	background-color: @BAR_COLOR_4;
-}
-.bar-color-5 {
-	background-color: @BAR_COLOR_5;
-}
-.bar-color-6 {
-	background-color: @BAR_COLOR_6;
-}
-.bar-color-7 {
-	background-color: @BAR_COLOR_7;
-}
+@DEEMPHASIZED: #989898; // based on colorpicker value from the mock; usually font colors should be provided explicitly, due to font aliasing and thus lack of precision for colorpicker on small fonts;
