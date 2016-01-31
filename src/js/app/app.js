@@ -2,10 +2,11 @@
 
 angular.module('SampleApp', [])
 
-.controller('SampleAppController', function ($scope) {
+.controller('SampleAppController', function ($scope, sampleAppDataService) {
 	var controller = this;
 
 	$scope.model = {
+		dataLoading: false,
 		max: 1,
 		datasets: []
 	};
@@ -48,6 +49,10 @@ angular.module('SampleApp', [])
 	};
 
 	controller.loadDatasets = function () {
+		sampleAppDataService.promiseData().then(function (response) {
+			$scope.model.datasets = response.data;
+			$scope.calculateMax();
+		});
 		// TODO
 	};
 });
