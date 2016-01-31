@@ -42,12 +42,34 @@ section.data-manager {
 	}
 
 	.error {
-		display: none;
+		position: absolute;
+	    right: 13px;
+	    color: @LIGHT;
+	    background: @WARNING;
+	    padding: 5px 20px;
+	    border-radius: 10px;
+	    z-index: 2;
+
+		opacity: 0;
+		transition: 0.3s opacity ease-out;
+
+	    &:before {
+	    	@distance: 6px;
+
+    	    content: "";
+		    position: absolute;
+		    width: 1px;
+		    height: 1px;
+		    top: -@distance;
+		    border-bottom: @distance solid @WARNING;
+		    border-left: @distance solid transparent;
+		    border-right: @distance solid transparent;
+	    }
 	}
 
 	.has-error {
 		.error {
-			display: block;
+			opacity: 1;
 		}
 	}
 }
@@ -62,6 +84,7 @@ section.bars {
 
 	.bar-value {
 		height: 20px;
+		transition: width 0.3s ease-in;
 	}
 
 	.generate-bar-colors(8);

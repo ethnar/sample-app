@@ -50,7 +50,7 @@ angular.module('SampleApp', [])
 		// this can turn into a performance bottleneck rather quickly due to date parse, so depending on the amount of data we could be better off changing the data storage to hold start date and amount of days instead of start and end dates
 		var startTime = new Date(dataset.endDate).getTime();
 		var endTime = new Date(dataset.startDate).getTime();
-		return (startTime - endTime) / (24 * 60 * 60 * 1000) + 1 /* inclusive */ || 0;
+		return Math.max((startTime - endTime) / (24 * 60 * 60 * 1000) + 1 /* inclusive */ || 0, 0);
 	};
 
 	controller.loadDatasets = function () {

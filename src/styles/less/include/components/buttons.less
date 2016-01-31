@@ -6,7 +6,7 @@
 	background: @WARNING;
 	border: none;
 	border-radius: 50%;
-	color: white;
+	color: @LIGHT;
 
     &::before {
     	content: "X"; // ideally we'd go with a custom font and replace X with an icon character
@@ -28,15 +28,15 @@
 
 .btn-default {
 	background: @ACTION_DEFAULT;
-	color: white;
+	color: @LIGHT;
 	text-shadow: none;
 	border: none;
 }
 .btn-default:focus, .btn-default:hover {
 	background: lighten(@ACTION_DEFAULT, 10%);
-	color: white;
+	color: @LIGHT;
 }
 .btn-default:active, .btn-default:active:focus {
 	background: darken(@ACTION_DEFAULT, 10%);
-	color: white;
+	color: @LIGHT;
 }
