@@ -6,13 +6,50 @@
 		<title>Sample app</title>
 		<link rel="stylesheet" type="text/css" href="styles/css/style.css">
 
-		<script type="text/javascript" src="libs/js/lodash.min.js"></script>
-		<script type="text/javascript" src="libs/js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="js/libs/lodash.min.js"></script>
+		<script type="text/javascript" src="js/libs/angular/angular.min.js"></script>
 		
-		<script type="text/javascript" src="app/js/app.js"></script>
+		<script type="text/javascript" src="js/app/app.js"></script>
 
 	</head>
-	<body ng-app="SampleApp">
+	<body ng-app="SampleApp" ng-controller="SampleAppController">
+		<header>
+			<span>Windows generator</span>
+			<fieldset>
+				<button class="btn btn-primary" ng-click="addDataset();">Add window</button>
+				<button class="btn btn-default" ng-click="outputDatasets();">Get data</button>
+			</fieldset>
+		</header>
+		<main>
+			<section>
+				<fieldset class="row" ng-repeat="dataset in model.datasets">
+					<div class="col-xs-3">
+						<!-- depending on the expected flexibility for the final solution we could move field names, amounts and types to a JSON config and build the form based on it -->
+						<label for="window-name-{{$index}}">Window name</label>
+						<input id="window-name-{{$index}}" type="text" class="form-control" ng-model="dataset.name" />
+					</div>
+					<div class="col-xs-3">
+						<label for="start-date-{{$index}}">Start date</label>
+						<input id="start-date-{{$index}}" type="text" class="form-control" ng-model="dataset.startDate" ng-change="calculateMax();" />
+					</div>
+					<div class="col-xs-3">
+						<label for="end-date-{{$index}}">End date</label>
+						<input id="end-date-{{$index}}" type="text" class="form-control" ng-model="dataset.endDate" ng-change="calculateMax();" />
+					</div>
+					<div class="col-xs-3">
+						<button ng-click="removeDataset($index);calculateMax();">X</button>
+					</div>
+				</fieldset>
+			</section>
+			<section>
+				<div ng-repeat="dataset in model.datasets">
+					<span>{{dataset.name}}</span>
+					<div class="bar-container">
+						<div class="bar-value"></div>
+					</div>
+				</div>
+			</section>
+		</main>
 		<footer>Made by Arek Bisaga</footer>
 	</body>
 </html>
