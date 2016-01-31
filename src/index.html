@@ -43,9 +43,11 @@
 			</section>
 			<section>
 				<div ng-repeat="dataset in model.datasets">
-					<span>{{dataset.name}}</span>
+					<span>{{dataset.name || 'Unnamed'}}</span>
 					<div class="bar-container">
-						<div class="bar-value"></div>
+						<div class="bar-value" ng-style="{width: (100 * calculateValue(dataset) / model.max) + '%'}">
+							{{calculateValue(dataset)}}
+						</div>
 					</div>
 				</div>
 			</section>
